@@ -4,7 +4,7 @@ pipeline {
     stage('stage 1') {
       steps {
         echo "This is $BUILD_NUMBER of $DEMO"
-        sh '"This is Build_Number $BUILD_NUMBER and DEMo $DEMO"'
+        sh 'This is Build_Number $BUILD_NUMBER and DEMo $DEMO'
       }
     }
 
