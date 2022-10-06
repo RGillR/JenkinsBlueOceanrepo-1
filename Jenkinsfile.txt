@@ -1,0 +1,28 @@
+pipeline {
+   agent any
+   
+   environment {
+       DEMO='2.1'
+       RELEASE='demo2 2.1'
+   }
+
+   stages {
+      stage('Dev') {
+        environment {
+            LOG_LEVEL='log level for dev'
+        }
+         steps {
+            echo "This is build number $BUILD_NUMBER of demo $DEMO and $RELEASE and log level $LOG_LEVEL"
+       
+         }
+      }
+
+      stage('TEST') {
+         steps{ 
+            echo "I am in stage 2"
+
+
+         }
+      } 
+   }
+}
