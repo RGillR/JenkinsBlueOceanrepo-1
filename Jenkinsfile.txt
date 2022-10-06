@@ -37,11 +37,11 @@ pipeline {
                 parameters {
                     string (name: 'Target_enviornment', defaultValue: 'PROD', description: 'Target development enviornment')
                     steps {
-                     echo " " "
+                     echo '''
 
-                         name = $name 
+                         "name = $name "
 
-                         " " "
+                         '''
                     }           
             }
 
