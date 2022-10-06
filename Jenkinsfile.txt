@@ -27,30 +27,33 @@ pipeline {
 
      stage('Deploy'){
             
-            
             input{
                 message 'Deploy?'
                 ok 'Yes, please deploy'
-                parameters {
+
+
+            } 
+            parameters {
                     string (name: 'Target_enviornment', defaultValue: 'PROD', description: 'Target development enviornment')
-                    steps {
-                     echo '''
-                        'this is the deploy stage '
+                }
 
-                         "name = $name "
+            steps {
+                     echo 'this is the deploy stage '
+                     echo  "name = $name "
 
-                         '''
+                         
                     }           
-            }
+        }
 
 
 
         }
-     } 
-      }
+     
+      
     post {
         always {
             echo ' prints whether deploy happened or not'
         }
     }
-   }
+}    
+   
