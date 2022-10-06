@@ -9,10 +9,10 @@ pipeline {
    stages {
       stage('Dev') {
         environment {
-            LOG_LEVEL='log level for dev'
+            LOG_LEVEL='DEv2.0'
         }
          steps {
-            echo "This is build number $BUILD_NUMBER of demo $DEMO and $RELEASE and log level $LOG_LEVEL"
+            echo "This is build number= $BUILD_NUMBER of demo = $DEMO and $RELEASE and log level= $LOG_LEVEL"
        
          }
       }
