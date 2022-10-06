@@ -57,7 +57,7 @@ pipeline {
 
             steps {
                      echo 'this is the deploy stage '
-                     echo "this is target = $Target_enviornment.description"
+                     echo "this is target = $Target_enviornment"
                 
 
                          
