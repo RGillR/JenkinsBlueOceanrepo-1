@@ -28,13 +28,13 @@ pipeline {
         stage('build') {
 
             parallel {
-                stage { ('first stage of the build section_paralel-1')
+                stage  ('first stage of the build section_paralel-1') {
                     steps {
                             echo "stage name = $STAGE_NAME"
                     }
                 }
 
-                stage { ('2nd stage of build section_parallel')    
+                stage  ('2nd stage of build section_parallel')    {
                     steps {
                         echo "stage name = $STAGE_NAME"
                     }
