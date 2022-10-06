@@ -36,6 +36,11 @@ pipeline {
                 ok 'Yes, please deploy'
                 parameters {
                     string (name: 'Target_enviornment', defaultValue: 'PROD', description: 'Target development enviornment')
+                    echo " " "
+                    
+                        name = $name 
+
+                        " " "
             }
 
         }
