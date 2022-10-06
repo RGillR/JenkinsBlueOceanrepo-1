@@ -7,22 +7,40 @@ pipeline {
    }
 
    stages {
-      stage('Dev') {
-        environment {
+        stage('Dev') {
+            environment {
             LOG_LEVEL='DEv2.0'
-        }
-         steps {
+            }
+            steps {
             echo "This is build number= $BUILD_NUMBER of demo = $DEMO and $RELEASE and log level= $LOG_LEVEL"
        
-         }
+            }
       }
 
-      stage('TEST') {
-         steps{ 
-            echo "I am in stage 2"
+        stage('TEST') {
+            steps{ 
+                echo "I am in stage 2"
 
 
-         }
-      } 
+            }
+        }
+
+     stage('Deploy'){
+
+            echo 'this is the deploy stage '
+            input{
+                message 'Deploy?'
+                ok 'Yes, please deploy'
+                parameters {
+                    string (name: 'Target_enviornment', defaultvalue: 'PROD', description: 'Target development enviornment')
+            }
+
+        }
+     } 
+      }
+    post {
+        always {
+            echo ' prints whether deploy happened or not'
+        }
+    }
    }
-}
