@@ -40,7 +40,7 @@ pipeline {
 
             steps {
                      echo 'this is the deploy stage '
-                     echo  "name = $name "
+                
 
                          
                     }           
