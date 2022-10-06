@@ -32,8 +32,8 @@ pipeline {
                 ok 'Yes, please deploy'
 
 
-            } 
-            parameters {
+            
+                parameters 
                     string (name: 'Target_enviornment', defaultValue: 'PROD', description: 'Target development enviornment')
                 }
 
