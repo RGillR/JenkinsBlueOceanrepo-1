@@ -27,7 +27,7 @@ pipeline {
         }
 
         stage('build') {
-            enviornment{
+            environment{
                 LOG_LEVEL = 'log level for build stage'
             }
             parallel {
