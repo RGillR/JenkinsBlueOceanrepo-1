@@ -19,18 +19,22 @@ pipeline {
 
         stage('TEST') {
             steps{ 
-                echo "I am in stage 2"
+                echo "I am in test stage"
+                writeFile file: 'test_results.txt', text: 'passed'
 
 
             }
         }
 
         stage('build') {
-
+            enviornment{
+                LOG_LEVEL = 'log level for build stage'
+            }
             parallel {
                 stage  ('first stage of the build section_paralel-1') {
                     steps {
-                            echo "stage name = $STAGE_NAME"
+                            echo "stage name = $STAGE_NAME and log level = $LOG_LEVEL"
+                        
                     }
                 }
 
@@ -47,20 +51,13 @@ pipeline {
             input{
                 message 'Deploy?'
                 ok 'Yes, please deploy'
-
-
-            
                 parameters {
                     string (name: 'Target_enviornment', defaultValue: 'PROD', description: 'Target development enviornment')
                 }
             }
-
             steps {
                      echo 'this is the deploy stage '
-                     echo "this is target = $Target_enviornment"
-                
-
-                         
+                     echo "this is target = $Target_enviornment"    
                     }           
         }
 
@@ -72,6 +69,7 @@ pipeline {
     post {
         always {
             echo ' prints whether deploy happened or not'
+            archiveArtifacts ''
         }
     }
 }    
