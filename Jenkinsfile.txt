@@ -69,7 +69,7 @@ pipeline {
     post {
         always {
             echo ' prints whether deploy happened or not'
-            archiveArtifacts ''
+            archiveArtifacts 'test_results.txt'
         }
     }
 }    
