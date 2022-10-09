@@ -1,0 +1,68 @@
+pipeline {
+   agent any
+   environment {
+       DEMO='3.1'
+       RELEASE='demo3 2.1'
+   }
+   stages {
+        stage('Dev') {
+            environment {
+            LOG_LEVEL='DEv2.0'
+            }
+            steps {
+            echo "This is build number= $BUILD_NUMBER of demo = $DEMO and $RELEASE and log level= $LOG_LEVEL"
+       
+             }
+      }
+        stage('TEST') {
+            steps{ 
+                echo "I am in test stage"
+                writeFile file: 'test_results.txt', text: 'passed'
+            }
+        }
+        stage('build') {
+            environment{
+                LOG_LEVEL = 'log level for build stage'
+            }
+            parallel {
+                stage  ('build-stage 1') {
+                    steps {
+                            echo "stage name = $STAGE_NAME and log level = $LOG_LEVEL"
+                            sh 'chmod +x build.sh'
+                            withCredentials ([string(credentialsId: 'an-api-key', variable: 'API_KEY')]) {
+                                   sh '''
+                                       ./build.sh
+                                       ''' 
+                            }
+                    }
+                }
+                stage  ('build - stage2')    {
+                    steps {
+                        echo "stage name = $STAGE_NAME"
+                    }
+                }
+            } 
+        }
+     stage('Deploy'){
+            
+            input{
+                message 'Deploy?'
+                ok 'Yes, please deploy'
+                parameters {
+                    string (name: 'Target_enviornment', defaultValue: 'PROD', description: 'Target development enviornment')
+                }
+            }
+            steps {
+                     echo 'this is the deploy stage '
+                     echo "this is target = $Target_enviornment"    
+                    }           
+        }
+        }
+    post {
+        always {
+            echo ' prints whether deploy happened or not'
+            archiveArtifacts 'test_results.txt'
+        }
+    }
+}    
+   
