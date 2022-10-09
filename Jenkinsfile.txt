@@ -5,18 +5,15 @@ pipeline {
        RELEASE='demo3 2.1'
    }
    stages {
-        stage('Dev') {
-            environment {
-            LOG_LEVEL='DEv2.0'
-            }
-            steps {
-            echo "This is build number= $BUILD_NUMBER of demo = $DEMO and $RELEASE and log level= $LOG_LEVEL"
-       
-             }
-      }
+
         stage('TEST') {
             steps{ 
-                echo "I am in test stage"
+                echo "I am in "
+                script{
+                    if (Math.random() > 0.5) {
+                        throw new exception()
+                    }
+                }
                 writeFile file: 'test_results.txt', text: 'passed'
             }
         }
@@ -40,11 +37,8 @@ pipeline {
             } 
         }
      stage('Deploy'){
-            
-
             steps {
                      echo 'this is the deploy stage '
-  
                     }           
         }
         }
@@ -54,6 +48,10 @@ pipeline {
             archiveArtifacts 'test_results.txt'
             slackSend channel: '#jenkins-declarative-pipeline',
                       message: "Release ${env.RELEASE}, success: ${currentBuild.fullDisplayName}."      
+        }
+        failure{
+            slackSend channel: '#jenkins-declarative-pipeline',
+                      message: "Release ${env.RELEASE}, failed: ${currentBuild.fullDisplayName}."   
         }
     }
 }    
