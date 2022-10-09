@@ -36,22 +36,12 @@ pipeline {
                             }
                     }
                 }
-                stage  ('build - stage2')    {
-                    steps {
-                        echo "stage name = $STAGE_NAME"
-                    }
-                }
+                
             } 
         }
      stage('Deploy'){
             
-            input{
-                message 'Deploy?'
-                ok 'Yes, please deploy'
-                parameters {
-                    string (name: 'Target_enviornment', defaultValue: 'PROD', description: 'Target development enviornment')
-                }
-            }
+
             steps {
                      echo 'this is the deploy stage '
                      echo "this is target = $Target_enviornment"    
@@ -59,9 +49,11 @@ pipeline {
         }
         }
     post {
-        always {
-            echo ' prints whether deploy happened or not'
+        sucess {
+            echo ' This is a successfull build'
             archiveArtifacts 'test_results.txt'
+            slackSend channel: '#Ragistic'
+                      message: "Release ${env.RELEASE}, success: ${currentBuild.fullDisplayName}."      
         }
     }
 }    
