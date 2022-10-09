@@ -52,7 +52,7 @@ pipeline {
         success {
             echo ' This is a successfull build'
             archiveArtifacts 'test_results.txt'
-            slackSend channel: '#general',
+            slackSend channel: '#jenkins-declarative-pipeline',
                       message: "Release ${env.RELEASE}, success: ${currentBuild}."      
         }
     }
