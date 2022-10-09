@@ -52,7 +52,7 @@ pipeline {
         success {
             echo ' This is a successfull build'
             archiveArtifacts 'test_results.txt'
-            slackSend channel: '#Ragistic',
+            slackSend channel: '#general',
                       message: "Release ${env.RELEASE}, success: ${currentBuild.fullDisplayName}."      
         }
     }
