@@ -11,7 +11,7 @@ pipeline {
                 echo "I am in "
                 script{
                     if (Math.random() > 0.5) {
-                        throw new exception()
+                        throw new Exception()
                     }
                 }
                 writeFile file: 'test_results.txt', text: 'passed'
