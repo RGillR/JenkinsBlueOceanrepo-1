@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+    enviornment {
+    VERSION = "0.2"
+    VERSION_RC = "rc.2"
+    }
+    stages{
+        stage ('Audit tools') {
+            steps{
+                sh '''
+                git version
+                docker version
+                dotnet --list-sdks
+                dotnet --list-runtimes
+                '''
+            }
+        }
+    }
+}
