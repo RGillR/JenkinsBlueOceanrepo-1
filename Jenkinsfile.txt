@@ -5,11 +5,11 @@ pipeline {
     VERSION_RC = "rc.2"
     }
     stages{
-        stage ('Audit tools') {
-            steps{
+        stage('Audit tools') {
+            steps {
                 sh '''
                 git version
-                docker --version
+                docker version
         
                 '''
             }
