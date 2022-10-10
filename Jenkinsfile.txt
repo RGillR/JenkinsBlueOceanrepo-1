@@ -12,6 +12,7 @@ pipeline {
         
                 '''
             }
+        }
             stage('build'){
                 steps{
                     echo "Building version: ${VERSION} with suffix: ${VERSION_RC}"
@@ -20,4 +21,3 @@ pipeline {
             }
         }
     }
-}
