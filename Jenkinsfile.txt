@@ -9,6 +9,7 @@ pipeline {
         stage('TEST') {
             steps{ 
                 echo "I am in "
+			    echo "JOB_NAME = $JOB_NAME"
                 script{
                     if (Math.random() > 0.5) {
                         throw new Exception()
